@@ -7,19 +7,9 @@ import {
     GraphQLList
     } from 'graphql';
 import _ from 'lodash';
+import Book from '../models/book';
+import Author from '../models/author';
 
-/* dummy data */
-let books = [
-    { name: "Empire", genre: "Fantasy", id: "1", authorId: '1' },
-    { name: "The final Empire", genre:"Romance", id:"2", authorId: '2' },
-    { name: "Egypt", genre: "Action", id:"3", authorId: '3' }
-];
-
-let authors = [
-    { name: "Sean.Kim", age:44, id:'1' },
-    { name: "Rebekah", age:40, id:'2' },
-    { name: "Patrick", age: 45, id:'3' }
-];
 
 /* Define the Types */
 const BookType = new GraphQLObjectType({
