@@ -6,7 +6,6 @@ import {
     GraphQLInt,
     GraphQLList
     } from 'graphql';
-
 import _ from 'lodash';
 
 /* dummy data */
