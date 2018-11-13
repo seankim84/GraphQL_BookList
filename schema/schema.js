@@ -1,9 +1,11 @@
-import { GraphQLObjectType, 
-         GraphQLString, 
-         GraphQLSchema,
-         GraphQLID,
-         GraphQLInt
-        } from 'graphql';
+import { 
+    GraphQLObjectType, 
+    GraphQLString, 
+    GraphQLSchema,
+    GraphQLID,
+    GraphQLInt,
+    GraphQLList
+    } from 'graphql';
 
 import _ from 'lodash';
 //dummy data
@@ -29,7 +31,7 @@ const BookType = new GraphQLObjectType({
         genre: { type: GraphQLString },
         author: {
             type: AuthorType,
-            resolve(parent, args){
+            resolve(parent, args){ // parent argument는 위의 타입을 상속받을 때 사용한다.
                console.log(parent);
                return _.find(authors, { id: parent.authorId })
             }
@@ -42,7 +44,13 @@ const  AuthorType = new GraphQLObjectType({
     fields: () => ({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
-        age: { type: GraphQLInt }
+        age: { type: GraphQLInt },
+        books: {
+            type: new GraphQLList(BookType),
+            resolve(parent, args){
+                return _.filter(books, { authorId: parent.id })
+            }
+        }
     })
 })
 
