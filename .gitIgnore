@@ -12,8 +12,8 @@
 /build
 
 #client
-/./node_modules
-/./.lock
+/./client/node_modules
+/./client/.lock
 
 # misc
 .DS_Store
