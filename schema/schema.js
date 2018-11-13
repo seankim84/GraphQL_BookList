@@ -22,7 +22,8 @@ const BookType = new GraphQLObjectType({
             type: AuthorType,
             resolve(parent, args){ // parent argument는 위의 타입을 상속받을 때 사용한다.
                console.log(parent);
-               return _.find(authors, { id: parent.authorId })
+               //return _.find(authors, { id: parent.authorId })
+               return Author.findById(parent.authorId);
             }
         }
     })
@@ -37,7 +38,8 @@ const  AuthorType = new GraphQLObjectType({
         books: {
             type: new GraphQLList(BookType),
             resolve(parent, args){
-                return _.filter(books, { authorId: parent.id })
+                //return _.filter(books, { authorId: parent.id })
+                return Book.find({ authorId: parent.id });
             }
         }
     })
@@ -53,6 +55,7 @@ const RootQuery = new GraphQLObjectType({ // 여기서 앞서 지정한 Types의
             resolve(parent, args){
                 /*console.log(typeof(args.id))
                 return  _.find(books, { id: args.id });*/
+                return Book.findById(args.id)
             }
         },
         author: {
@@ -60,12 +63,21 @@ const RootQuery = new GraphQLObjectType({ // 여기서 앞서 지정한 Types의
             args: { id: { type: GraphQLID }},
             resolve(parent, args){
                 /* return _.find(authors, { id: args.id }) */
+                return Author.findById(args.id)
             }
         },
+        books: {
+            type: new GraphQLList(BookType),
+            resolve(parent, args){
+                return Book.find({});
+            }
+        },
+
         authors : {
             type: new GraphQLList(AuthorType), // 다른 type 을 정의해둔것을 갖다 사용할때는 GrahpQLList를 사용한다.
             resolve(parent, args){
                 /* return authors */
+                return Author.find({});
             }
         }
     }
