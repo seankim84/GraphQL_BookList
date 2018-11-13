@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const AuthorSchema = new Schema({
     name: String,
-    genre: String,
+    age: String,
     authorId: String
 });
 
