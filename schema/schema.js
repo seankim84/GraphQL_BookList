@@ -8,7 +8,8 @@ import {
     } from 'graphql';
 
 import _ from 'lodash';
-//dummy data
+
+/* dummy data */
 let books = [
     { name: "Empire", genre: "Fantasy", id: "1", authorId: '1' },
     { name: "The final Empire", genre:"Romance", id:"2", authorId: '2' },
@@ -21,11 +22,10 @@ let authors = [
     { name: "Patrick", age: 45, id:'3' }
 ];
 
-
-
+/* Define the Types */
 const BookType = new GraphQLObjectType({
     name: 'Book',
-    fields: () => ({
+    fields: () => ({ //fields는 항상 function 으로 사용해야 함.
         id: { type: GraphQLID },
         name: { type: GraphQLString },
         genre: { type: GraphQLString },
@@ -54,7 +54,8 @@ const  AuthorType = new GraphQLObjectType({
     })
 })
 
-const RootQuery = new GraphQLObjectType({
+/*Root Query */
+const RootQuery = new GraphQLObjectType({ // 여기서 앞서 지정한 Types의 query들을 사용한다.
     name: "RootQueryType",
     fields: {
         book: {
@@ -71,11 +72,17 @@ const RootQuery = new GraphQLObjectType({
             resolve(parent, args){
                 return _.find(authors, { id: args.id })
             }
+        },
+        authors : {
+            type: new GraphQLList(AuthorType), // 다른 type 을 정의해둔것을 갖다 사용할때는 GrahpQLList를 사용한다.
+            resolve(parent, args){
+                return authors
+            }
         }
     }
 });
 
-
+/* export the Modules */
 
 const schema = new GraphQLSchema({
     query: RootQuery
