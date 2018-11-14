@@ -109,7 +109,7 @@ const Mutation = new GraphQLObjectType({
             args: {
                 name: { type: new GraphQLNonNull(GraphQLString) }, // GraphQLString can not be "null"
                 genre: { type: new GraphQLNonNull(GraphQLString) },
-                authorId: { type: GraphQLID }
+                authorId: { type: new GraphQLNonNull(GraphQLID) }
             },
 
             resolve(parent, args){

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { graphql } from 'react-apollo';
-import { getAuthorQuery } from '../queries/queries';
+import { graphql, compose } from 'react-apollo';
+import { getAuthorQuery, addBookMutation } from '../queries/queries';
  
 class AddBook extends Component {
 
@@ -14,7 +14,8 @@ class AddBook extends Component {
     }
 
     displayAuthors(){
-        let data = this.props.data 
+        let data = this.props.getAuthorQuery; 
+        console.log(this.props);
         if(data.loading){
             return(<option disabled>Loading Authors....</option>)
         } else {
@@ -28,7 +29,7 @@ class AddBook extends Component {
 
     submitForm(e){
         e.preventDefault();
-        console.log(this.state)
+        this.props.addBookMutation();
     }
 
     render() {
@@ -60,4 +61,10 @@ class AddBook extends Component {
     }
 }
 
-export default graphql(getAuthorQuery)(AddBook);
+/*export default graphql(getAuthorQuery)(addBookMutation)(AddBook); */
+// 이렇게 사용하는 대신에 compose로 묶어준다.
+
+export default compose(
+    graphql( getAuthorQuery, { name: "getAuthorQuery" }),
+    graphql(addBookMutation, { name: "addBookMutation" })
+)(AddBook)
