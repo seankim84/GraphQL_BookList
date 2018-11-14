@@ -1,15 +1,6 @@
 import React, { Component } from 'react';
-import { gql } from 'apollo-boost'; // query에 있는 data 정의 시 사용
 import { graphql } from 'react-apollo'; // react Component와 graphQl Query를 묶어줄때 사용
-
-const getBookQuery = gql`
-    {
-        books {
-            name
-            id
-        }
-    }
-`
+import { getBookQuery } from '../queries/queries';
 
 class BookList extends Component {
     displayBooks() {
