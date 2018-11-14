@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { gql } from 'apollo-boost';
-import { graphql } from 'react-apollo';
+import { gql } from 'apollo-boost'; // query에 있는 data 정의 시 사용
+import { graphql } from 'react-apollo'; // react Component와 graphQl Query를 묶어줄때 사용
 
 const getBookQuery = gql`
     {
@@ -13,15 +13,15 @@ const getBookQuery = gql`
 
 class BookList extends Component {
     displayBooks() {
-        let data = this.props.data;
+        let data = this.props.data; // 오직 data property 만을 이용해야한다.(불러오는것중에 console.log 확인)-> this.props.data
         if(data.loading){
             return(
                 <div>Loading Books</div>
             )
         } else {
-            return data.books.map(book => ( 
+            return data.books.map(book => (
                 <li key={book.id}>{book.name}</li>
-                )
+            )
             )}
     }
 
@@ -30,7 +30,7 @@ class BookList extends Component {
         return (
             <div>
                 <ul id="book_list">
-                    <li>{this.displayBooks()}</li>
+                    {this.displayBooks()}
                 </ul>
             </div>
         );

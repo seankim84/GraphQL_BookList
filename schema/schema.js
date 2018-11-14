@@ -87,7 +87,7 @@ const RootQuery = new GraphQLObjectType({ // 여기서 앞서 지정한 Types의
 /* Mutation */
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
-    fields:{
+    fields: {
         addAuthor: {
             type: AuthorType,
             args: {
