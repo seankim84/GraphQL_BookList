@@ -29,7 +29,13 @@ class AddBook extends Component {
 
     submitForm(e){
         e.preventDefault();
-        this.props.addBookMutation();
+        this.props.addBookMutation({
+            variables: { // comes from queries Mutation
+                name: this.state.name,
+                genre: this.state.genre,
+                authorId: this.state.authorId
+            }
+        });
     }
 
     render() {
