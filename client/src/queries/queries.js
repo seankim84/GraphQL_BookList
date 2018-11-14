@@ -39,8 +39,8 @@ export const getBookQuery = gql `
                 name
                 age
                 books {
-                    name
                     id
+                    name
                 }
             }
         }
