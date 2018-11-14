@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo'; // react Component와 graphQl Query를 묶어줄때 사용
-import { getBookQuery } from '../queries/queries';
+import { getBooksQuery } from '../queries/queries';
+import BookDetails from './BookDetails';
+
 
 class BookList extends Component {
     displayBooks() {
@@ -23,9 +25,10 @@ class BookList extends Component {
                 <ul id="book_list">
                     {this.displayBooks()}
                 </ul>
+                <BookDetails />
             </div>
         );
     }
 }
 
-export default graphql(getBookQuery)(BookList);
+export default graphql(getBooksQuery)(BookList);
