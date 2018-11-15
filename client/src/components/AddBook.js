@@ -42,13 +42,12 @@ class AddBook extends Component {
     render() {
         return (
             <form id="add_book" onSubmit= {this.submitForm.bind(this)}>
-
                 <div className="fields">
                     <label>Book Name:</label>
                         <input type="text" onChange={ e => this.setState({name: e.target.value})}/>
                 </div>
 
-                <div>
+                <div className="fields">
                     <label>Genre:</label>
                         <input type="text" onChange={ e => this.setState({genre: e.target.value})}/>
                 </div>
